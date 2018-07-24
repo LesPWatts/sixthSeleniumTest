@@ -32,6 +32,8 @@ public class FifthSeleniumTest {
 //		WebDriver driver = new FirefoxDriver();
 //		setBrowser();
 //		WebDriver driver = new EdgeDriver();
+// put into github maybe 7/24 or so
+		
 		PropertiesFile.readPropertiesFile();
 		
 		setBrowserConfig();
@@ -250,10 +252,11 @@ public static void runTestC_PlayWithXpathsInLegal() {
 		item = driver.findElement(By.xpath("html/body/div/div[2]/div/div[3]/div/section/div/ul/li[2]/a"));
 		System.out.println("going to legal notice:"+item.getAttribute("title"));
 		System.out.println("class: "+item.getAttribute("class") +"  text: "+item.getText() +	"  href: "+item.getAttribute("href"));
-		if (browser.contains("InternetExplorer"))
-			item.sendKeys(Keys.ENTER);			// ie can't handle clicking
-		else 
-			item.click();
+		enterClick(item);
+//		if (browser.contains("InternetExplorer"))
+//			item.sendKeys(Keys.ENTER);			// ie can't handle clicking
+//		else 
+//			item.click();
 //		item.click();
 // you cannot use an item after it has been clicked out of		
 //		System.out.println("went to legal notice"+item.getAttribute("title"));
@@ -282,5 +285,23 @@ public static void runTestC_PlayWithXpathsInLegal() {
 		e.printStackTrace();
 	}	
 }
+
+// internet explorer has problems for now
+// instead of clicking on an item, ie works when you send an ENTER key. Other browsers click.
+
+public static void enterClick(WebElement anItem) {
+	try {
+		if (browser.contains("InternetExplorer"))
+			anItem.sendKeys(Keys.ENTER);			// ie can't handle clicking
+		else 
+			anItem.click();
+	}
+	catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+
 }
 
